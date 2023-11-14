@@ -1,7 +1,7 @@
 ---
 # This playbook deploys a simple standalone Tomcat 7 server.
 
-- hosts: tomcat-servers
+- hosts: tower_poc_target_ubuntu_svr
   remote_user: root
   become: yes
   become_method: sudo
