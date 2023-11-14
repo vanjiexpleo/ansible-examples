@@ -1,6 +1,6 @@
 ---
 - name: A simple playbook file
-  hosts: all
+  hosts: tower_poc_target_ubuntu_svr
   tasks:
   - name: Print a sample message
     debug:
