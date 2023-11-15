@@ -17,6 +17,11 @@
         - default-jdk
         - unzip
 
+    - name: Create Tomcat installation directory
+      ansible.builtin.file:
+        path: "{{ tomcat_install_dir }}"
+        state: directory
+
     - name: Download and extract Apache Tomcat
       get_url:
         #https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.82/bin/apache-tomcat-9.0.82.tar.gz
@@ -25,10 +30,10 @@
       notify:
         - Extract Tomcat
 
-    - name: Create Tomcat installation directory
-      file:
-        path: "{{ tomcat_install_dir }}"
-        state: directory
+    # - name: Create Tomcat installation directory
+    #   file:
+    #     path: "{{ tomcat_install_dir }}"
+    #     state: directory
 
     - name: Extract Tomcat
       ansible.builtin.unarchive:
