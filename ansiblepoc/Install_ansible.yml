@@ -1,0 +1,42 @@
+---
+- name: Install Tomcat on tower_poc_target_ubuntu_svr group
+  hosts: tower_poc_target_ubuntu_svr
+  become: true
+
+  vars:
+    tomcat_version: "9"
+    tomcat_install_dir: "/opt/tomcat"
+    tomcat_service_name: "tomcat"
+
+  tasks:
+    - name: Update package cache and install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - default-jdk
+        - unzip
+
+    - name: Download and extract Apache Tomcat
+      get_url:
+        url: "https://downloads.apache.org/tomcat/tomcat{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+      notify:
+        - Extract Tomcat
+
+    - name: Create Tomcat installation directory
+      file:
+        path: "{{ tomcat_install_dir }}"
+        state: directory
+
+    - name: Extract Tomcat
+      ansible.builtin.unarchive:
+        src: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        dest: "{{ tomcat_install_dir }}"
+        remote_src: true
+        creates: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}"
+
+    - name: Ensure Tomcat service is running
+      ansible.builtin.service:
+        name: "{{ tomcat_service_name }}"
+        state: started
