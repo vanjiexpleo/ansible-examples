@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    tomcat_version: "9"
+    tomcat_version: "9.0.82"
     tomcat_install_dir: "/opt/tomcat"
     tomcat_service_name: "tomcat"
 
@@ -19,7 +19,8 @@
 
     - name: Download and extract Apache Tomcat
       get_url:
-        url: "https://downloads.apache.org/tomcat/tomcat{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+        #https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.82/bin/apache-tomcat-9.0.82.tar.gz
+        url: "https://dlcdn.apache.org/tomcat/tomcat-9/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
         dest: "{{ tomcat_install_dir }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
       notify:
         - Extract Tomcat
