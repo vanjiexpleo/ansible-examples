@@ -21,20 +21,26 @@
         path: "{{ deploy_directory }}"
         state: directory
 
+    - name: Debug download_required (Before)
+      ansible.builtin.debug:
+      var: download_required
+
     - name: Download JAR from JFrog Artifactory
       ansible.builtin.uri:
-        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
-        dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"  # Updated destination file name
-        method: GET
-        headers:
-          "X-JFrog-Art-Api": "{{ api_key }}"
-        status_code: 200
-      # when: download_required | default(true)
+      url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
+      dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
+      method: GET
+      headers:
+        "X-JFrog-Art-Api": "{{ api_key }}"
+      status_code: 200
 
+    - name: Debug download_required (After)
+      ansible.builtin.debug:
+      var: download_required
     - name: Run command to host the app in the background
       ansible.builtin.shell:
-        cmd: "{{ app_command }}"
-        chdir: "{{ deploy_directory }}"
+      cmd: "{{ app_command }}"
+      chdir: "{{ deploy_directory }}"
       async: 0
       poll: 0
       become_user: root  # Replace with the user who should run the app
