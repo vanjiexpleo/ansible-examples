@@ -1,0 +1,42 @@
+- name: Download JAR from JFrog Artifactory and Deploy
+  hosts: tower_poc_target_ubuntu_svr
+  become: true  # Run tasks as a superuser
+ 
+  vars:
+    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory/coffeeshop"
+    jfrog_repository: "https://devopsansible.jfrog.io"https://devopsansible.jfrog.io/artifactory/coffeeshop/nl/brianvermeer/workshop/coffeeShop/2.6.0/
+    artifact_path: "/coffeeshop/nl/brianvermeer/workshop/coffeeShop/2.6.0/"
+    download_destination: "/home/vanji"
+    api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
+    username: "aravindrekha1504@gmail.com"
+    deploy_directory: "/home/vanji"
+    app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
+ 
+  tasks:
+    - name: Create deploy directory if not exist
+      ansible.builtin.file:
+        path: "{{ deploy_directory }}"
+        state: directory
+ 
+    - name: Download JAR from JFrog Artifactory
+      ansible.builtin.uri:
+        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
+        dest: "{{ download_destination }}/artifact.jar"
+        method: GET
+        headers:
+          "X-JFrog-Art-Api": "{{ api_key }}"
+        status_code: 200
+ 
+    - name: Run command to host the app in the background
+      ansible.builtin.shell:
+        cmd: "{{ app_command }}"
+        chdir: "{{ deploy_directory }}"
+      async: 0
+      poll: 0
+      become_user: ansible  # Replace with the user who should run the app
+ 
+  handlers:
+    - name: Reload app (example)
+      ansible.builtin.systemd:
+        name: Javacoffeeshop
+        state: restarted
