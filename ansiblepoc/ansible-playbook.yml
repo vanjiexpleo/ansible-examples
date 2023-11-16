@@ -11,7 +11,7 @@
     username: "aravindrekha1504@gmail.com"
     deploy_directory: "/home/vanjimuthu_palani"
     app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar"
-    # download_required: true  # Added default value for clarity
+    download_required: true  # Added default value for clarity
     start_command_required: true  # Added default value for clarity
 
   tasks:
@@ -41,9 +41,9 @@
       ansible.builtin.shell:
         cmd: "{{ app_command }}"
         chdir: "{{ deploy_directory }}"
-        async: 0
-        poll: 0
-        become_user: root  # Replace with the user who should run the app
+        #async: 0
+        #poll: 0
+        #become_user: root  # Replace with the user who should run the app
         when: start_command_required | default(true)
 
   handlers:
