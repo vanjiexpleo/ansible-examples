@@ -26,6 +26,7 @@
         headers:
           "X-JFrog-Art-Api": "{{ api_key }}"
         status_code: 200
+     when: download_required | default(true)
  
     - name: Run command to host the app in the background
       ansible.builtin.shell:
@@ -34,7 +35,7 @@
       async: 0
       poll: 0
       become_user: ansible  # Replace with the user who should run the app
- 
+      when: start_command_required | default(true)
   handlers:
     - name: Reload app (example)
       ansible.builtin.systemd:
