@@ -12,7 +12,7 @@
     username: "aravindrekha1504@gmail.com"
     deploy_directory: "/home/vanjimuthu_palani"
     app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
-    download_required: true  # Added default value for clarity
+    # download_required: true  # Added default value for clarity
     start_command_required: true  # Added default value for clarity
 
   tasks:
@@ -29,7 +29,7 @@
         headers:
           "X-JFrog-Art-Api": "{{ api_key }}"
         status_code: 200
-      when: download_required | default(true)
+      # when: download_required | default(true)
 
     - name: Run command to host the app in the background
       ansible.builtin.shell:
