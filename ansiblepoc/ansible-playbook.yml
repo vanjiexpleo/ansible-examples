@@ -28,6 +28,8 @@
       ansible.builtin.uri:
         url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
         dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
+        url_username: "{{ username }}"
+        url_password: "Admin@123456"
         method: GET
         headers:
           "X-JFrog-Art-Api": "{{ api_key }}"
