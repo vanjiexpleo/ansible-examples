@@ -4,7 +4,7 @@
  
   vars:
     jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory/coffeeshop"
-    jfrog_repository: "https://devopsansible.jfrog.io"https://devopsansible.jfrog.io/artifactory/coffeeshop/nl/brianvermeer/workshop/coffeeShop/2.6.0/
+    jfrog_repository: "https://devopsansible.jfrog.io"
     artifact_path: "/coffeeshop/nl/brianvermeer/workshop/coffeeShop/2.6.0/"
     download_destination: "/home/vanji"
     api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
