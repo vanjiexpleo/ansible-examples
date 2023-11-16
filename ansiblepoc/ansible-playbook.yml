@@ -9,7 +9,7 @@
     download_destination: "/home/vanjimuthu_palani"
     api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
     username: "aravindrekha1504@gmail.com"
-    deploy_directory: "/home/vanji"
+    deploy_directory: "/home/vanjimuthu_palani"
     app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
  
   tasks:
