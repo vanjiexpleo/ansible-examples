@@ -23,7 +23,7 @@
 
     - name: Debug download_required (Before)
       ansible.builtin.debug:
-      var: download_required
+        var: download_required
 
     - name: Download JAR from JFrog Artifactory
       ansible.builtin.uri:
