@@ -1,4 +1,3 @@
----
 - name: Download JAR from JFrog Artifactory and Deploy
   hosts: tower_poc_target_ubuntu_svr
   become: true  # Run tasks as a superuser
@@ -11,7 +10,7 @@
     api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
     username: "aravindrekha1504@gmail.com"
     deploy_directory: "/home/vanjimuthu_palani"
-    app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
+    app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar"
     # download_required: true  # Added default value for clarity
     start_command_required: true  # Added default value for clarity
 
@@ -27,24 +26,25 @@
 
     - name: Download JAR from JFrog Artifactory
       ansible.builtin.uri:
-      url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
-      dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
-      method: GET
-      headers:
-        "X-JFrog-Art-Api": "{{ api_key }}"
-      status_code: 200
+        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
+        dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
+        method: GET
+        headers:
+          "X-JFrog-Art-Api": "{{ api_key }}"
+        status_code: 200
 
     - name: Debug download_required (After)
       ansible.builtin.debug:
-      var: download_required
+        var: download_required
+
     - name: Run command to host the app in the background
       ansible.builtin.shell:
-      cmd: "{{ app_command }}"
-      chdir: "{{ deploy_directory }}"
-      async: 0
-      poll: 0
-      become_user: root  # Replace with the user who should run the app
-      when: start_command_required | default(true)
+        cmd: "{{ app_command }}"
+        chdir: "{{ deploy_directory }}"
+        async: 0
+        poll: 0
+        become_user: root  # Replace with the user who should run the app
+        when: start_command_required | default(true)
 
   handlers:
     - name: Reload app (example)
