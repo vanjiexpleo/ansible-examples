@@ -34,7 +34,7 @@
         chdir: "{{ deploy_directory }}"
       async: 0
       poll: 0
-      become_user: ansible  # Replace with the user who should run the app
+      become_user: root  # Replace with the user who should run the app
       when: start_command_required | default(true)
   handlers:
     - name: Reload app (example)
