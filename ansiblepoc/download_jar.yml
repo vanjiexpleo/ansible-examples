@@ -16,10 +16,7 @@
 
   tasks:
     - name: create to the application directory
-      command: "cd {{ download_destination }}"
-      command: "mkdir testdir"
-      command: "cd testdir}"
-      command: "pwd"
+      command: "mkdir {{ download_destination }}/testdir"
       register: output
     - name: Display output
       debug:
