@@ -17,9 +17,6 @@
   tasks:
     - name: "just execute a ls -lrt command"
       shell: "pwd & mkdir testvanji"
-      register: "output"
-    - debug: var=output.stdout_lines
-
     # - name: Download JAR from JFrog Artifactory
     #   ansible.builtin.uri:
     #     url: "{{ jfrog_artifactory_url }}"
