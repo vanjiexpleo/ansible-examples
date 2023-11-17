@@ -15,20 +15,17 @@
     # start_command_required: true  # Added default value for clarity
 
   tasks:
-  #   - name: Create deploy directory if not exist
-  #     ansible.builtin.file:
-  #       path: "{{ deploy_directory }}"
-  #       state: directory
+    - name: Ensure download destination directory exists
+      ansible.builtin.file:
+        path: "{{ download_destination }}"
+        state: directory
+      when: not ansible_check_mode  # Skip in check mode
 
     - name: Download JAR from JFrog Artifactory
       ansible.builtin.uri:
         url: "{{ jfrog_artifactory_url }}"
-        dest: "{{ download_destination }}"
+        dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         headers:
           "Authorization": "Basic {{ (username + ':' + api_key) | b64encode }}"
         method: GET
-      ignore_errors: yes
-      register: download_result
-
-    - debug:
-        var: download_result
+      when: not ansible_check_mode  # Skip in check mode
