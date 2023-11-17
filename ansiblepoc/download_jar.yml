@@ -27,6 +27,7 @@
         headers:
           "Authorization": "Basic {{ (username + ':' + api_key) | b64encode }}"
         method: GET
+      ignore_errors: yes
       register: download_result
 
     - debug:
