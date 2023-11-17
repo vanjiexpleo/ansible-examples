@@ -15,14 +15,10 @@
     # start_command_required: true  # Added default value for clarity
 
   tasks:
-    - name: create the application directory
-      file:
-        path: "{{ download_destination }}/testdir"
-        state: directory
-      register: output
-    - name: Display output
-      debug:
-        var: output
+    - name: "just execute a ls -lrt command"
+      shell: "pwd & mkdir {{ download_destination }}/test"
+      register: "output"
+    - debug: var=output.stdout_lines
 
     # - name: Download JAR from JFrog Artifactory
     #   ansible.builtin.uri:
