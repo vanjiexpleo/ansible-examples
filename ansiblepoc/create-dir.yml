@@ -1,0 +1,14 @@
+- name: Create Directory
+  hosts: tower_poc_target_ubuntu_svr
+  become: true  # This is to run tasks with elevated privileges (sudo)
+
+  tasks:
+    - name: Ensure the directory exists
+      ansible.builtin.file:
+        path: "/home/vanjimuthu_palani/testdir"  # Specify the desired directory path
+        state: directory
+        owner: vanjimuthu_palani  # Specify the desired owner
+        group: vanjimuthu_palani     # Specify the desired group
+        mode: "0755"           # Specify the desired permissions
+
+
