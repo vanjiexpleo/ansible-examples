@@ -16,7 +16,7 @@
 
   tasks:
     - name: "just execute a ls -lrt command"
-      shell: "pwd & mkdir {{ download_destination }}/test"
+      shell: "pwd & mkdir testvanji"
       register: "output"
     - debug: var=output.stdout_lines
 
