@@ -1,5 +1,5 @@
 - name: Download JAR from JFrog Artifactory and Deploy
-  hosts: tower_poc_target_ubuntu_svr
+  hosts: localhost
   become: true  # Run tasks as a superuser
 
   vars:
