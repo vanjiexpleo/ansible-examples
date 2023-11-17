@@ -15,17 +15,21 @@
     # start_command_required: true  # Added default value for clarity
 
   tasks:
-    - name: Ensure download destination directory exists
-      ansible.builtin.file:
-        path: "{{ download_destination }}"
-        state: directory
-      when: not ansible_check_mode  # Skip in check mode
+    - name: create to the application directory
+      command: "cd {{ download_destination }}"
+      command: "mkdir testdir"
+      command: "cd testdir}"
+      command: "pwd"
+      register: output
+    - name: Display output
+      debug:
+        var: output
 
-    - name: Download JAR from JFrog Artifactory
-      ansible.builtin.uri:
-        url: "{{ jfrog_artifactory_url }}"
-        dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
-        headers:
-          "Authorization": "Basic {{ (username + ':' + api_key) | b64encode }}"
-        method: GET
-      when: not ansible_check_mode  # Skip in check mode
+    # - name: Download JAR from JFrog Artifactory
+    #   ansible.builtin.uri:
+    #     url: "{{ jfrog_artifactory_url }}"
+    #     dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
+    #     headers:
+    #       "Authorization": "Basic {{ (username + ':' + api_key) | b64encode }}"
+    #     method: GET
+    #   when: not ansible_check_mode  # Skip in check mode
