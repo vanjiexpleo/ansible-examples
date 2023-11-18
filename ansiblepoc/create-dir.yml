@@ -3,12 +3,13 @@
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
 
+  vars:
+    path: "/home/ansible/testprema"
+
   tasks:
     - name: Debug Information
       debug:
         msg: "Creating directory on {{ inventory_hostname }} at {{ path }}"
-      vars:
-        path: "/home/ansible/testprema"
 
     - name: Create a directory
       file:
