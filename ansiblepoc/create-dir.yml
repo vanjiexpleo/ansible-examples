@@ -1,5 +1,5 @@
-  ---
-- name: Create Directory
+
+- name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
   vars:
