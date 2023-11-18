@@ -2,20 +2,12 @@
 - name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
-  vars:
-    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory/coffeeshop/nl/brianvermeer/workshop/coffeeShop/2.6.0/coffeeShop-2.6.0.jar"
-    # jfrog_repository: "coffeeshop"  # Updated repository name
-    # artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
-    download_destination: "/home/ansible"
-    api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
-    username: "aravindrekha1504@gmail.com"
-    # deploy_directory: "/home/vanjimuthu_palani"
-    # app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar"
-    # download_required: true  # Added default value for clarity
-    # start_command_required: true  # Added default value for clarity
+
 
   tasks:
-    - name: just execute a ls -lrt command
-      shell: "pwd & mkdir testvanji"
-
+    - name: Create a directory
+      file:
+        path: "/home/ansible/testprema"  # Specify the path of the directory you want to create
+        state: directory
+        mode: "0755" 
 
