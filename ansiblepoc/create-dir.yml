@@ -5,6 +5,14 @@
 
   vars:
     path: "/home/ansible/test"
+    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory/coffeeshop/*.jar"
+    jfrog_repository: "coffeeshop"  # Updated repository name
+    artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
+    download_destination: "/home/ansible/test"
+    api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
+    username: "aravindrekha1504@gmail.com"
+    deploy_directory: "/home/ansible/test"
+    app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
 
   tasks:
     - name: Debug Information
@@ -16,6 +24,11 @@
         path: "{{ path }}"
         state: directory
         mode: "0755"
+    - name: Download JAR file from Artifactory
+      get_url:
+        url: "{{ jfrog_artifactory_url }}"
+        dest: "{{ download_destination }}/{{ jfrog_artifactory_url | basename }}"
+        mode: "0644"
 
 
 
