@@ -5,7 +5,7 @@
 
   vars:
     path: "/home/ansible/test"
-    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory/coffeeshop/*.jar"
+    jfrog_artifactory_url: "https://devopsansible.jfrog.io/"
     jfrog_repository: "coffeeshop"  # Updated repository name
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
     download_destination: "/home/ansible/test"
@@ -24,11 +24,14 @@
         path: "{{ path }}"
         state: directory
         mode: "0755"
-    - name: Download JAR file from Artifactory
-      get_url:
-        url: "{{ jfrog_artifactory_url }}"
-        dest: "{{ download_destination }}/{{ jfrog_artifactory_url | basename }}"
-        mode: "0644"
+    - name: Download JAR from JFrog Artifactory
+      ansible.builtin.uri:
+      url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
+      dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
+      method: GET
+      headers:
+        "X-JFrog-Art-Api": "{{ api_key }}"
+      status_code: 200
 
 
 
