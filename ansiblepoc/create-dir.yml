@@ -25,13 +25,16 @@
         state: directory
         mode: "0755"
     - name: Download JAR from JFrog Artifactory
-      ansible.builtin.uri:
-      url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}"
-      dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
-      method: GET
-      headers:
-        "X-JFrog-Art-Api": "{{ api_key }}"
-      status_code: 200
+      uri:
+        url: "{{ jfrog_artifactory_url }}"
+        method: GET
+        dest: "{{ download_destination }}/{{ jfrog_artifactory_url | basename }}"
+        mode: "0644"
+       # user: "{{ username }}"
+        #password: "{{ password }}"
+        headers:
+          Content-Type: application/octet-stream
+
 
 
 
