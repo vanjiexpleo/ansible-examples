@@ -7,7 +7,7 @@
   tasks:
     - name: Create a directory
       file:
-        path: "/home/ansible/testprema"  # Specify the path of the directory you want to create
+        path: "/home/ubuntu/dirprema"  # Specify the path of the directory you want to create
         state: directory
         mode: "0755" 
 
