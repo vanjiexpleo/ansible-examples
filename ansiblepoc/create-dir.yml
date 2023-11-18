@@ -33,6 +33,9 @@
         mode: "0644"
         headers:
           "X-JFrog-Art-Api": "{{ api_key }}"
+          If-None-Match: ""  # Ignore ETag header
+          If-Modified-Since: "Sat, 01 Jan 2000 00:00:00 GMT"  # Ignore Last-Modified header
+
     - name: Run command to host the app in the background
       ansible.builtin.shell:
         cmd: "{{ app_command }}"
