@@ -5,8 +5,8 @@
 
   vars:
     path: "/home/ansible/test"
-    jfrog_artifactory_url: "https://devopsansible.jfrog.io/"
-    jfrog_repository: "coffeeshop"  # Updated repository name
+    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
+    jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
     download_destination: "/home/ansible/test"
     api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
@@ -24,16 +24,15 @@
         path: "{{ path }}"
         state: directory
         mode: "0755"
+
     - name: Download JAR from JFrog Artifactory
       uri:
-        url: "{{ jfrog_artifactory_url }}"
+        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
         method: GET
-        dest: "{{ download_destination }}/{{ jfrog_artifactory_url | basename }}"
+        dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         mode: "0644"
-       # user: "{{ username }}"
-        #password: "{{ password }}"
         headers:
-          Content-Type: application/octet-stream
+          "X-JFrog-Art-Api": "{{ api_key }}"
 
 
 
