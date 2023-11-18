@@ -4,7 +4,7 @@
   become: true  # This is to run tasks with elevated privileges (sudo)
 
   vars:
-    path: "/home/ansible/testprema"
+    path: "/home/ansible/test"
 
   tasks:
     - name: Debug Information
