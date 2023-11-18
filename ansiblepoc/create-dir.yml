@@ -33,6 +33,13 @@
         mode: "0644"
         headers:
           "X-JFrog-Art-Api": "{{ api_key }}"
+    - name: Run command to host the app in the background
+      ansible.builtin.shell:
+        cmd: "{{ app_command }}"
+        chdir: "{{ deploy_directory }}"
+      async: 0
+      poll: 0
+      become_user: your_app_user  # Replace with the user who should run the app
 
 
 
