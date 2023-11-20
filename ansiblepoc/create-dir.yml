@@ -7,7 +7,7 @@
   vars:
     
     #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
-    JFROG_ARTIFACTORY_URL: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
+    jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
     jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
     download_destination: "/home/ansible/testprema"
@@ -29,7 +29,7 @@
 
     - name: Download JAR from JFrog Artifactory
       uri:
-        url: "${{ JFROG_ARTIFACTORY_URL }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
+        url: "${{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
         method: GET
         dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         mode: "0644"
