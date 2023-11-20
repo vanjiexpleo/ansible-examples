@@ -1,6 +1,6 @@
 
 - name: Create_Directory
-  hosts: tower_poc_target_ubuntu_svr
+  hosts: tower_poc_target_ubuntu_sv
   become: true  # This is to run tasks with elevated privileges (sudo)
   #include_vars:
     #file: "vault.yml"
