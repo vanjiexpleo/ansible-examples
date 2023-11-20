@@ -4,7 +4,7 @@
   become: true  # This is to run tasks with elevated privileges (sudo)
 
   vars:
-    path: "/home/ansible/test"
+    
     jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
     jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
@@ -21,7 +21,7 @@
 
     - name: Create a directory
       file:
-        path: "{{ path }}"
+        path: "{{ download_destination }}"
         state: directory
         mode: "0755"
 
