@@ -35,6 +35,7 @@
     - name: Debug - Check JFrog Artifactory URL
       debug:
         var: JFROG_ARTIFACTORY_URL
+        var: jfrog_repository
 
     - name: Download JAR from JFrog Artifactory
       uri:
