@@ -2,10 +2,9 @@
 - name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
-  include_vars:
-    file: "vault.yml"
- # env:
-          #jfrog_artifactory_url: ${{ secrets.jfrog_artifactory_url }}
+  #include_vars:
+    #file: "vault.yml"
+
   vars:
     
     #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
@@ -19,6 +18,10 @@
     app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
 
   tasks:
+  tasks:
+    - name: Load External Variables
+      include_vars:
+        file: vault.yml
     - name: Debug Information
       debug:
         msg: "Creating directory on {{ inventory_hostname }} at {{ download_destination }}"
