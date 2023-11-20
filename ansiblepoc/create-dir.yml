@@ -17,7 +17,7 @@
   tasks:
     - name: Debug Information
       debug:
-        msg: "Creating directory on {{ inventory_hostname }} at {{ path }}"
+        msg: "Creating directory on {{ inventory_hostname }} at {{ download_destination }}"
 
     - name: Create a directory
       file:
