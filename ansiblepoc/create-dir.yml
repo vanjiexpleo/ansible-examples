@@ -26,6 +26,10 @@
         path: "{{ download_destination }}"
         state: directory
         mode: "0755"
+        tasks:
+    - name: Debug - Check JFrog Artifactory URL
+      debug:
+        var: jfrog_artifactory_url
 
     - name: Download JAR from JFrog Artifactory
       uri:
