@@ -2,21 +2,26 @@
 - name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
- # env:
-          #jfrog_artifactory_url: ${{ secrets.jfrog_artifactory_url }}
-  vars:
-    
-    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
-    jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
-    jfrog_repository: "coffeeshop"
-    artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
-    download_destination: "/home/ansible/testprema"
-    api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
-    username: "aravindrekha1504@gmail.com"
-    deploy_directory: "/home/ansible/testprema"
-    app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
+  #include_vars:
+    #file: "vault.yml"
 
+  #vars:
+    
+    #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
+    #jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
+    #jfrog_repository: "coffeeshop"
+    #artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
+    #download_destination: "/home/ansible/testprema"
+    #api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
+    #username: "aravindrekha1504@gmail.com"
+    #deploy_directory: "/home/ansible/testprema"
+    #app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
+
+  
   tasks:
+    - name: Load External Variables
+      include_vars:
+        file: vault.yml
     - name: Debug Information
       debug:
         msg: "Creating directory on {{ inventory_hostname }} at {{ download_destination }}"
@@ -29,11 +34,12 @@
         
     - name: Debug - Check JFrog Artifactory URL
       debug:
-        var: jfrog_artifactory_url
+        var: JFROG_ARTIFACTORY_URL
+        
 
     - name: Download JAR from JFrog Artifactory
       uri:
-        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
+        url: "{{ JFROG_ARTIFACTORY_URL }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
         method: GET
         dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         mode: "0644"
