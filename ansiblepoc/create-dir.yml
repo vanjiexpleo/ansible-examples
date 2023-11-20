@@ -2,7 +2,8 @@
 - name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
-
+  env:
+          jfrog_artifactory_url: ${{ secrets.jfrog_artifactory_url }}
   vars:
     
     #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
