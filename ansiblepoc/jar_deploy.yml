@@ -5,7 +5,7 @@
   #include_vars:
     #file: "vault.yml"
 
-  #vars:
+  vars:
     
     #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
     #jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
