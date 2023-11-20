@@ -8,10 +8,10 @@
     jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
     jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
-    download_destination: "/home/ansible/test"
+    download_destination: "/home/ansible/testprema"
     api_key: "AKCp8pRjbpVpeC3aKfFCU1WREzZUHBXKDpo1jq4PqQ2P5qcbVtPoYegFJnLV12U9LXmS4voYd"
     username: "aravindrekha1504@gmail.com"
-    deploy_directory: "/home/ansible/test"
+    deploy_directory: "/home/ansible/testprema"
     app_command: "nohup java -jar {{ deploy_directory }}/coffeeShop-2.6.0.jar &"
 
   tasks:
