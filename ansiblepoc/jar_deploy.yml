@@ -6,7 +6,7 @@
           #jfrog_artifactory_url: ${{ secrets.jfrog_artifactory_url }}
   vars:
     
-    #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
+    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
     jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
     jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
