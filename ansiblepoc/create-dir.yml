@@ -27,7 +27,7 @@
 
     - name: Download JAR from JFrog Artifactory
       uri:
-        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
+        url: "${{ secrets.jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
         method: GET
         dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         mode: "0644"
