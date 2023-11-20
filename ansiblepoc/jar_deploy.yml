@@ -2,11 +2,13 @@
 - name: Create_Directory
   hosts: tower_poc_target_ubuntu_svr
   become: true  # This is to run tasks with elevated privileges (sudo)
+  include_vars:
+    file: "vault.yml"
  # env:
           #jfrog_artifactory_url: ${{ secrets.jfrog_artifactory_url }}
   vars:
     
-    jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
+    #jfrog_artifactory_url: "https://devopsansible.jfrog.io/artifactory"
     #jfrog_artifactory_url: "{{ lookup('env', 'JFROG_ARTIFACTORY_URL') }}"
     jfrog_repository: "coffeeshop"
     artifact_path: "nl/brianvermeer/workshop/coffeeShop/2.6.0/"
@@ -33,7 +35,7 @@
 
     - name: Download JAR from JFrog Artifactory
       uri:
-        url: "{{ jfrog_artifactory_url }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
+        url: "{{ JFROG_ARTIFACTORY_URL }}/{{ jfrog_repository }}/{{ artifact_path }}/coffeeShop-2.6.0.jar"
         method: GET
         dest: "{{ download_destination }}/coffeeShop-2.6.0.jar"
         mode: "0644"
