@@ -1,4 +1,3 @@
----
 plugin: amazon.aws.aws_ec2
 regions:
   - ap-south-1
@@ -9,8 +8,8 @@ filters:
 strict_permissions: False
 hostnames:
   - tag:Name
-keyed_groups:
-- prefix: tag
-  key: tags
-compose:
-  ansible_host: private_ip_address
+# keyed_groups:
+# - prefix: tag
+#   key: tags
+# compose:
+#   ansible_host: private_ip_address
